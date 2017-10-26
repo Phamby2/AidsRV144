@@ -1,0 +1,84 @@
+---
+title: "RV144 Aids trials"
+author: "Paul Hamby "
+date: " October 16th,2017"
+output: html_document
+---
+
+
+# Thailand Aids study
+```{r include=FALSE}
+require(tigerstats)
+```
+
+## Introduction
+
+In the late 1980s in Thailand, there was a dramatic increase in the prevalence of infection with the human immunodeficiency virus type 1 (HIV-1) in sentinel surveillance cohorts.1-3 Initially, these groups consisted of injection-drug users and commercial sex workers; they were subsequently expanded to include persons in the general population. By 1995, the overall seroprevalence of HIV-1 reached a peak of 3.7% among conscripts in the Royal Thai Army and of 12.5% among conscripts from Northern Thailand.2,4,5 The Thai Ministry of Public Health responded with an effective HIV-prevention campaign, and the number of new HIV-1 infections per year decreased from an estimated 143,000 in 1990 to 14,000 in 2007.2,4,6-9 The persistence of new infection despite these measures led public health officials to conclude that an HIV vaccine, within the context of a broader HIV-prevention program, was needed for better control of the epidemic.
+
+
+
+## Methods and data
+
+Study Design and Population
+This study was a community-based, randomized, multicenter, double-blind, placebo-controlled efficacy trial of the prime–boost combination of vaccines containing ALVAC-HIV (vCP1521) (Sanofi Pasteur) and AIDSVAX B/E (Global Solutions for Infectious Diseases). For details regarding the vaccines and placebo, see the Supplementary Appendix, available with the full text of this article at NEJM.org. The study was designed to evaluate two coprimary end points: the prevention of HIV-1 infection and the effect of vaccination on the early viral load after infection. The trial was conducted through facilities of the Thai Ministry of Public Health in Rayong and Chon Buri provinces. From September 2003 through December 2005, a total of 16,402 volunteers were enrolled.
+Thai men and women who were between the ages of 18 and 30 years and who were not infected with HIV were recruited from the community without regard to HIV risk (i.e., community risk). Written informed consent was obtained from all volunteers, who were required to pass a written test of understanding. Women were counseled to practice effective contraception until 3 months after the last vaccination; pregnant and breast-feeding women were excluded.
+
+###Study Design and Population
+This study was a community-based, randomized, multicenter, double-blind, placebo-controlled efficacy trial of the prime–boost combination of vaccines containing ALVAC-HIV (vCP1521) (Sanofi Pasteur) and AIDSVAX B/E (Global Solutions for Infectious Diseases). For details regarding the vaccines and placebo, see the Supplementary Appendix, available with the full text of this article at NEJM.org. The study was designed to evaluate two coprimary end points: the prevention of HIV-1 infection and the effect of vaccination on the early viral load after infection. The trial was conducted through facilities of the Thai Ministry of Public Health in Rayong and Chon Buri provinces. From September 2003 through December 2005, a total of 16,402 volunteers were enrolled.
+Thai men and women who were between the ages of 18 and 30 years and who were not infected with HIV were recruited from the community without regard to HIV risk (i.e., community risk). Written informed consent was obtained from all volunteers, who were required to pass a written test of understanding. Women were counseled to practice effective contraception until 3 months after the last vaccination; pregnant and breast-feeding women were excluded.
+
+###Primary End Points
+HIV-1 Infection
+HIV-1 infection was diagnosed in 132 subjects (56 in the vaccine group and 76 in the placebo group) during 52,985 person-years of follow-up in the intention-to-treat analysis, in 86 subjects (36 in the vaccine group and 50 in the placebo group) during 36,720 person-years of follow-up in the per-protocol analysis, and in 125 subjects (51 in the vaccine group and 74 in the placebo group) during 52,985 person-years of follow-up in the modified intention-to-treat analysis. One subject in the placebo group who was identified by hospital record as being seropositive for HIV after dying from Pneumocystis jirovecii pneumonia was included in the analysis before the unblinding of the study. This diagnosis of HIV-1 infection was the only one that occurred outside planned procedures.
+We create the following data set
+
+```{r}
+groupsize = 16402
+subgp = groupsize/2
+vacine = c(subgp-51,51)
+placebo =  c(subgp-74,74)
+results = as.table(cbind(vacine,placebo))
+rownames(results) <- c("none","aids")
+
+```
+
+
+## Results
+<!-- You are to add descriptive comments to explain to the reader what the plot is showing !-->
+The plot is showing us that we sampled a group size of 16,402 people. From that group, there are two subgroups, those who have recieved the HIV Vaccine and those who have recieved the placebo vaccine. One group was composed of 8,150 people who reieved that vaccine, and from that group of people, appproximatley 51 people had the HIV virus. The placebo group was made up of 8127 people and of that group of people, 74 of them had the HIV virus. 
+### Graphical results
+<!--Display graphical evidence as to the effectiveness of the vaccine with explanations!-->
+Based on the graph, we can see that those who did not have the HIV virus were not affected by the placebo. However, when observing the group with HIV, there was a higher percent of people who recieved the HIV virus after having the placebo injection. One possible explanation for this could be how the HIV victims could beleieve that the placebo vaccine completley removed the virus. Upon thinking that the HIV vaccine would truley prevent the virus from spreading, they were not too careful on preventing it.  
+```{r}
+barchartGC(results,type = "percent")
+```
+The graph 
+
+### Numerical Results
+
+<!--Display numerical evidence as to the effectiveness of the vaccine with explanations !--> 
+
+```{r}
+colPerc(results)
+rowPerc(results)
+```
+
+Based on the numerical results, it appears the vaccine for the group of people with aids was in fact effective. We can see based on the data, that after given the vacine, less than 1% at approximatley 0.62 people still had HIV/AIDS. However, when observing the placebo group, we see that only 1% of the population had HIV/AIDS. This could be explained based on the fact that during the 1980's, the HIV/AIDS epidemic was present. 
+
+## Inferential results
+
+<!--Display inferential evidence as to the effectiveness of the vaccine with explanations and interpretations!-->
+
+```{r}
+chisqtestGC(results, graph = TRUE)
+```
+```{r}
+fisher.test(results)
+```
+Based on the Chi-squared test, it appears that there were not similar results from both the group with HIV and the placebo group. This is based on the fact that the P-value is low and therefore, we have to reject the null hypothesis. The null hypothesis states that both groups will both have about 63 people who will remain with HIV. 
+Based on Fisher's Test for Count Data, it appears the odds of contracting HIV/AIDS are not the same for both the placebo group and the HIV group. This could be explained based on the difference in sexual activty and or drug use. Therefore, it appears the odds of contracting AIDS after the vaccine are approximatley 1.46 percent. 
+
+## Conclusions
+
+<Summarise your results as to the effectiveness of the vaccine with explanations that could be understood by your mom>
+In conclusion, we noticed a difference in the probability of contracting the HIV virus between the placebo group(group who did not orignally have the virus) and the HIV group. This study was conducted at a time where the HIV/Aids epidemic was occuring and a treatment needed to be discovered. However, upon the use of the vaccine, we noticed that the vaccine was effective at treating both of the groups. After the treatment of 8,150 people who had HIV, only 51 people still had the virus. After the treatment of 8,127 people, there were still 74 people who had contracted the HIV virus. One possible explanation for this could be that the group simply thought that they could be immune to the virus itself. This makes sense because during the 1980's the general public was not too familar with the virus. This is evident as many believed at first that only homosexual males could obtain the virus. However, with later research, that was proven to be inaccurate as both men and women can contract the virus. This can be either from sexual activity, blood transfusion, or sharing neeedles with those who have the virus. 
